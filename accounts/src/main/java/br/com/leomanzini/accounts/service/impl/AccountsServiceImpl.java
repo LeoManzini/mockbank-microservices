@@ -59,20 +59,18 @@ public class AccountsServiceImpl implements AccountsServiceInterface {
             throw new IllegalArgumentException("AccountsDto cannot be null");
         }
 
-        if (accountsDto.getAccountNumber() != null && !accountsDto.getAccountNumber().equals(accountNumber)) {
+        if (!accountNumber.equals(accountsDto.getAccountNumber())) {
             throw new IllegalArgumentException("Account number in the request body does not match the path variable");
         }
 
-        Accounts accounts = accountsRepository.findById(accountNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Account", "AccountNumber", accountNumber.toString())
-        );
+        Accounts accounts = accountsRepository.findById(accountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "AccountNumber", accountNumber.toString()));
         AccountsMapper.mapToAccounts(accountsDto, accounts);
         accounts = accountsRepository.save(accounts);
 
         Long customerId = accounts.getCustomerId();
-        Customer customer = customerRepository.findById(customerId).orElseThrow(
-                () -> new ResourceNotFoundException("Customer", "CustomerID", customerId.toString())
-        );
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "CustomerID", customerId.toString()));
         CustomerMapper.mapToCustomer(accountsDto.getCustomer(), customer);
         customerRepository.save(customer);
     }
@@ -80,9 +78,8 @@ public class AccountsServiceImpl implements AccountsServiceInterface {
     @Override
     @Transactional
     public void deleteAccount(String mobileNumber) {
-        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
-        );
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber));
         accountsRepository.deleteByCustomerId(customer.getCustomerId());
         customerRepository.deleteById(customer.getCustomerId());
     }
