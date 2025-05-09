@@ -42,4 +42,25 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer>
+            <id>LeoManzini</id>
+            <name>Leonardo H. Manzini</name>
+            <email>leo.henrique.manzini@gmail.com</email>
+            <url>https://github.com/LeoManzini</url>
+            <organization>Arcum Group</organization>
+            <organizationUrl>https://arcumgroup.com.br/</organizationUrl>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+            <timezone>America/New_York</timezone>
+            <properties>
+                <picUrl>http://www.example.com/jdoe/pic</picUrl>
+            </properties>
+        </developer>
+    </developers>
 </project>
