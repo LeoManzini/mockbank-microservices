@@ -1,13 +1,17 @@
 package br.com.leomanzini.cards.controller;
 
 import br.com.leomanzini.cards.dto.CardsDto;
+import br.com.leomanzini.cards.dto.ErrorResponseDto;
 import br.com.leomanzini.cards.dto.ResponseDto;
 import br.com.leomanzini.cards.service.CardsServiceInterface;
 import br.com.leomanzini.cards.utils.CardsConstants;
 import br.com.leomanzini.cards.utils.ResponseBuilder;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -59,5 +63,36 @@ public class CardsController {
             example = "1234567890")@RequestParam @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits") String mobileNumber) {
         CardsDto cardsDto = cardsService.fetchCard(mobileNumber);
         return ResponseEntity.ok(cardsDto);
+    }
+
+    @Operation(
+            summary = "Update card details",
+            description = "Update mocked card details"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "OK"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "BAD REQUEST",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "NOT FOUND",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
+            )
+    })
+    @PutMapping("/{mobileNumber}")
+    public ResponseEntity<ResponseDto> updateCardDetails(@Parameter(
+            name = "mobileNumber",
+            description = "Mobile number to search for mock card",
+            required = true,
+            example = "1234567890"
+    ) @PathVariable String mobileNumber, @Valid @RequestBody CardsDto cardsDto) {
+        cardsService.updateCard(mobileNumber, cardsDto);
+        return ResponseBuilder.ok(CardsConstants.MESSAGE_200);
     }
 }

@@ -16,9 +16,10 @@ public interface CardsServiceInterface {
     CardsDto fetchCard(String mobileNumber);
 
     /**
-     * @param cardsDto - CardsDto Object
+     * @param mobileNumber - Input Mobile Number
+     * @param cardsDto - Card Details
      */
-    void updateCard(CardsDto cardsDto);
+    void updateCard(String mobileNumber, CardsDto cardsDto);
 
     /**
      * @param mobileNumber - Input Mobile Number

@@ -8,6 +8,7 @@ import br.com.leomanzini.cards.mapper.CardsMapper;
 import br.com.leomanzini.cards.repository.CardsRepository;
 import br.com.leomanzini.cards.service.CardsServiceInterface;
 import br.com.leomanzini.cards.utils.CardsConstants;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class CardsServiceImpl implements CardsServiceInterface {
     private final CardsRepository cardsRepository;
 
     @Override
+    @Transactional
     public Long createCard(String mobileNumber) {
         Optional<Cards> optionalCards = cardsRepository.findByMobileNumber(mobileNumber);
         if (optionalCards.isPresent()) {
@@ -31,25 +33,22 @@ public class CardsServiceImpl implements CardsServiceInterface {
 
     @Override
     public CardsDto fetchCard(String mobileNumber) {
-        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber)
-        );
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
         return CardsMapper.mapToCardsDto(cards, new CardsDto());
     }
 
     @Override
-    public void updateCard(CardsDto cardsDto) {
-        Cards cards = cardsRepository.findByCardNumber(cardsDto.getCardNumber()).orElseThrow(
-                () -> new ResourceNotFoundException("Card", "CardNumber", cardsDto.getCardNumber()));
+    @Transactional
+    public void updateCard(String mobileNumber, CardsDto cardsDto) {
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
         CardsMapper.mapToCards(cardsDto, cards);
         cardsRepository.save(cards);
     }
 
     @Override
+    @Transactional
     public void deleteCard(String mobileNumber) {
-        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber)
-        );
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
         cardsRepository.deleteById(cards.getCardId());
     }
 
