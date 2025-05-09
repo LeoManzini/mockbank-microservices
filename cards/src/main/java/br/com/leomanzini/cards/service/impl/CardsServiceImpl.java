@@ -13,7 +13,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -25,8 +24,7 @@ public class CardsServiceImpl implements CardsServiceInterface {
     @Override
     @Transactional
     public Long createCard(String mobileNumber) {
-        Optional<Cards> optionalCards = cardsRepository.findByMobileNumber(mobileNumber);
-        if (optionalCards.isPresent()) {
+        if (cardsRepository.findByMobileNumber(mobileNumber).isPresent()) {
             throw new CardAlreadyExistsException("Card already registered with given mobileNumber " + mobileNumber);
         }
         return cardsRepository.save(createNewCard(mobileNumber)).getCardId();
@@ -34,7 +32,8 @@ public class CardsServiceImpl implements CardsServiceInterface {
 
     @Override
     public CardsDto fetchCard(String mobileNumber) {
-        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
         return CardsMapper.mapToCardsDto(cards, new CardsDto());
     }
 
@@ -45,7 +44,8 @@ public class CardsServiceImpl implements CardsServiceInterface {
             throw new IllegalArgumentException("Mobile number in the request body does not match the path variable");
         }
 
-        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
         CardsMapper.mapToCards(cardsDto, cards);
         cardsRepository.save(cards);
     }
@@ -53,7 +53,8 @@ public class CardsServiceImpl implements CardsServiceInterface {
     @Override
     @Transactional
     public void deleteCard(String mobileNumber) {
-        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
         cardsRepository.deleteById(cards.getCardId());
     }
 
