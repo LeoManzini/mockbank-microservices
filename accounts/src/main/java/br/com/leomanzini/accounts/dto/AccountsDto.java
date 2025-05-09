@@ -1,5 +1,6 @@
 package br.com.leomanzini.accounts.dto;
 
+import br.com.leomanzini.accounts.entity.enums.AccountType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -25,10 +26,11 @@ public class AccountsDto {
     @Schema(
             name = "accountType",
             description = "Account type",
-            example = "SAVINGS"
+            example = "SAVINGS",
+            allowableValues = {"SAVINGS", "CURRENT", "SALARY"}
     )
     @NotBlank(message = "Account type is mandatory")
-    private String accountType;
+    private AccountType accountType;
 
     @Schema(
             name = "branchAddress",

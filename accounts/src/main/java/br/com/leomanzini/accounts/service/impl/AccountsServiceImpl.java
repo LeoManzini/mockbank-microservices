@@ -4,6 +4,7 @@ import br.com.leomanzini.accounts.dto.AccountsDto;
 import br.com.leomanzini.accounts.dto.CustomerDto;
 import br.com.leomanzini.accounts.entity.Accounts;
 import br.com.leomanzini.accounts.entity.Customer;
+import br.com.leomanzini.accounts.entity.enums.AccountType;
 import br.com.leomanzini.accounts.exception.CustomerAlreadyExistsException;
 import br.com.leomanzini.accounts.exception.ResourceNotFoundException;
 import br.com.leomanzini.accounts.mapper.AccountsMapper;
@@ -92,7 +93,7 @@ public class AccountsServiceImpl implements AccountsServiceInterface {
         long randomAccNumber = 100000000L + new Random().nextInt(900000000);
 
         account.setAccountNumber(randomAccNumber);
-        account.setAccountType(AccountsConstants.SAVINGS);
+        account.setAccountType(AccountType.SAVINGS);
         account.setBranchAddress(AccountsConstants.ADDRESS);
         return account;
     }

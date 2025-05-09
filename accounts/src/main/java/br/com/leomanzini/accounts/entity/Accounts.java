@@ -1,5 +1,6 @@
 package br.com.leomanzini.accounts.entity;
 
+import br.com.leomanzini.accounts.entity.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +19,8 @@ public class Accounts extends BaseEntity {
     private Long customerId;
 
     @Column(nullable = false)
-    private String accountType;
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
     @Column(nullable = false)
     private String branchAddress;
