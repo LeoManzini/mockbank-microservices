@@ -19,6 +19,7 @@ public class Cards extends BaseEntity {
     private String mobileNumber;
     @Column(unique = true, updatable = false)
     private String cardNumber;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CardType cardType;
     private int totalLimit;

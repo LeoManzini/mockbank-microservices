@@ -15,8 +15,11 @@ public class Loans extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loanId;
+    @Column(unique = true, nullable = false)
     private String mobileNumber;
+    @Column(unique = true, nullable = false)
     private String loanNumber;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private LoanType loanType;
     private int totalLoan;
