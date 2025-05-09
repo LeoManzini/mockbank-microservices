@@ -8,6 +8,7 @@ import br.com.leomanzini.accounts.service.AccountsServiceInterface;
 import br.com.leomanzini.accounts.utils.AccountsConstants;
 import br.com.leomanzini.accounts.utils.ResponseBuilder;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -51,7 +52,12 @@ public class AccountsController {
             description = "Fetch a specific account and customer details"
     )
     @GetMapping
-    public ResponseEntity<AccountsDto> fetchAccountDetails(@RequestParam @Pattern(regexp = "(^$|[0-9]{10,15})", message = "Mobile number should be valid") String mobileNumber) {
+    public ResponseEntity<AccountsDto> fetchAccountDetails(@Parameter(
+            name = "mobileNumber",
+            description = "Mobile number of the customer",
+            required = true,
+            example = "1234567890"
+    ) @RequestParam @Pattern(regexp = "(^$|[0-9]{10,15})", message = "Mobile number should be valid") String mobileNumber) {
         return ResponseEntity.ok(accountsService.fetchAccountDetails(mobileNumber));
     }
 
@@ -76,7 +82,12 @@ public class AccountsController {
             )
     })
     @PutMapping("/{accountNumber}")
-    public ResponseEntity<ResponseDto> updateAccountDetails(@PathVariable Long accountNumber, @Valid @RequestBody AccountsDto accountsDto) {
+    public ResponseEntity<ResponseDto> updateAccountDetails(@Parameter(
+            name = "accountNumber",
+            description = "Account number",
+            required = true,
+            example = "1234567890"
+    ) @PathVariable Long accountNumber, @Valid @RequestBody AccountsDto accountsDto) {
         accountsService.updateAccount(accountNumber, accountsDto);
         return ResponseBuilder.ok(AccountsConstants.MESSAGE_200);
     }
@@ -97,7 +108,12 @@ public class AccountsController {
             )
     })
     @DeleteMapping("/{mobileNumber}")
-    public ResponseEntity<Void> deleteAccountDetails(@PathVariable @Pattern(regexp = "(^$|[0-9]{10,15})", message = "Mobile number should be valid") String mobileNumber) {
+    public ResponseEntity<Void> deleteAccountDetails(@Parameter(
+            name = "mobileNumber",
+            description = "Mobile number of the customer",
+            required = true,
+            example = "1234567890"
+    ) @PathVariable @Pattern(regexp = "(^$|[0-9]{10,15})", message = "Mobile number should be valid") String mobileNumber) {
         accountsService.deleteAccount(mobileNumber);
         return ResponseBuilder.noContent();
     }
