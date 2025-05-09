@@ -1,2 +1,2 @@
 # mockbank-microservices
-Repo to hold a mock bank and his respectives microservices
+Repo to hold a mock bank and his respective microservices
