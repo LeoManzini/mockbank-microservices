@@ -40,7 +40,7 @@ public class CardsController {
             responseCode = "201",
             description = "CREATED"
     )
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ResponseDto> createCard(@Parameter(
             name = "mobileNumber",
             description = "Mocked mobile number to create a mocked card",

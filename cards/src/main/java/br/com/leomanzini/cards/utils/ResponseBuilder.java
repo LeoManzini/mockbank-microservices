@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 public class ResponseBuilder {
 
-    public static ResponseEntity<ResponseDto> created(String message, Long id) {
+    public static ResponseEntity<ResponseDto> created(String message, Object id) {
         String returnMessage = String.format(message, id);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
