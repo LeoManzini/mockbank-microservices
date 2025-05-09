@@ -36,9 +36,9 @@ public class LoansServiceImpl implements LoansServiceInterface {
     }
 
     @Override
-    public void updateLoan(String loanNumber, LoansDto loansDto) {
-        if (!loanNumber.equals(loansDto.getLoanNumber())) {
-            throw new IllegalArgumentException("Loan number in the request body does not match the path variable");
+    public void updateLoan(String mobileNumber, LoansDto loansDto) {
+        if (!mobileNumber.equals(loansDto.getMobileNumber())) {
+            throw new IllegalArgumentException("Mobile number in the request body does not match the path variable");
         }
 
         Loans loans = loansRepository.findByLoanNumber(loansDto.getLoanNumber())

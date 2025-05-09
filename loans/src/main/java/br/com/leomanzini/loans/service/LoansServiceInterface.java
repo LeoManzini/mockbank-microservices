@@ -16,9 +16,10 @@ public interface LoansServiceInterface {
     LoansDto fetchLoan(String mobileNumber);
 
     /**
+     * @param mobileNumber - Input Mobile Number
      * @param loansDto - LoansDto Object
      */
-    void updateLoan(String loanNumber, LoansDto loansDto);
+    void updateLoan(String mobileNumber, LoansDto loansDto);
 
     /**
      * @param mobileNumber - Input Mobile Number

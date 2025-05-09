@@ -83,14 +83,14 @@ public class LoansController {
                     content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
             )
     })
-    @PutMapping("/{loanNumber}")
+    @PutMapping("/{mobileNumber}")
     public ResponseEntity<ResponseDto> updateLoanDetails(@Parameter(
-            name = "loanNumber",
-            description = "Loan number to search for mock loan",
+            name = "mobileNumber",
+            description = "Mobile number to update a mock loan",
             required = true,
-            example = "548732457654"
-    ) @PathVariable @Pattern(regexp="(^$|[0-9]{12})",message = "LoanNumber must be 12 digits") String loanNumber, @Valid @RequestBody LoansDto loansDto) {
-        loansService.updateLoan(loanNumber, loansDto);
+            example = "1234567890"
+    ) @PathVariable @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber, @Valid @RequestBody LoansDto loansDto) {
+        loansService.updateLoan(mobileNumber, loansDto);
         return ResponseBuilder.ok(LoansConstants.MESSAGE_200);
     }
 
@@ -112,7 +112,7 @@ public class LoansController {
     @DeleteMapping("/{mobileNumber}")
     public ResponseEntity<Void> deleteLoanDetails(@Parameter(
             name = "mobileNumber",
-            description = "Mobile number to delete a mock card",
+            description = "Mobile number to delete a mock loan",
             required = true,
             example = "1234567890"
     ) @PathVariable @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {

@@ -17,7 +17,7 @@ public class Loans extends BaseEntity {
     private Long loanId;
     @Column(unique = true, nullable = false)
     private String mobileNumber;
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, updatable = false)
     private String loanNumber;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
