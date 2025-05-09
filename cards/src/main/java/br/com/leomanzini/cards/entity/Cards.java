@@ -1,9 +1,7 @@
 package br.com.leomanzini.cards.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import br.com.leomanzini.cards.entity.enums.CardType;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -19,7 +17,8 @@ public class Cards extends BaseEntity {
     private Long cardId;
     private String mobileNumber;
     private String cardNumber;
-    private String cardType;
+    @Enumerated(EnumType.STRING)
+    private CardType cardType;
     private int totalLimit;
     private int amountUsed;
     private int availableAmount;

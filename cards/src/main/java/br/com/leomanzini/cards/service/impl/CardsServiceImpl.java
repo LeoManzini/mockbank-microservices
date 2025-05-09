@@ -2,6 +2,7 @@ package br.com.leomanzini.cards.service.impl;
 
 import br.com.leomanzini.cards.dto.CardsDto;
 import br.com.leomanzini.cards.entity.Cards;
+import br.com.leomanzini.cards.entity.enums.CardType;
 import br.com.leomanzini.cards.exception.CardAlreadyExistsException;
 import br.com.leomanzini.cards.exception.ResourceNotFoundException;
 import br.com.leomanzini.cards.mapper.CardsMapper;
@@ -57,7 +58,7 @@ public class CardsServiceImpl implements CardsServiceInterface {
         long randomCardNumber = 100000000000L + new Random().nextInt(900000000);
         newCard.setCardNumber(Long.toString(randomCardNumber));
         newCard.setMobileNumber(mobileNumber);
-        newCard.setCardType(CardsConstants.CREDIT_CARD);
+        newCard.setCardType(CardType.CREDIT);
         newCard.setTotalLimit(CardsConstants.NEW_CARD_LIMIT);
         newCard.setAmountUsed(0);
         newCard.setAvailableAmount(CardsConstants.NEW_CARD_LIMIT);
