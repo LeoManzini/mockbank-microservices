@@ -30,7 +30,9 @@ public class CardsDto {
 
     @NotEmpty(message = "CardType can not be a null or empty")
     @Schema(
-            description = "Type of the card", example = "CREDIT"
+            description = "Type of the card",
+            example = "CREDIT",
+            allowableValues = {"CREDIT", "DEBIT", "PREPAID"}
     )
     private CardType cardType;
 
