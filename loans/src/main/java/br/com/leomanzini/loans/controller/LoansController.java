@@ -109,13 +109,13 @@ public class LoansController {
                     content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
             )
     })
-    @DeleteMapping
+    @DeleteMapping("/{mobileNumber}")
     public ResponseEntity<Void> deleteLoanDetails(@Parameter(
             name = "mobileNumber",
             description = "Mobile number to delete a mock card",
             required = true,
             example = "1234567890"
-    ) @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
+    ) @PathVariable @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
         loansService.deleteLoan(mobileNumber);
         return ResponseBuilder.noContent();
     }

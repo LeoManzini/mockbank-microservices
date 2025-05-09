@@ -2,10 +2,7 @@ package br.com.leomanzini.loans.dto;
 
 import br.com.leomanzini.loans.entity.enums.LoanType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Schema(name = "Loans",
@@ -28,7 +25,7 @@ public class LoansDto {
     )
     private String loanNumber;
 
-    @NotEmpty(message = "LoanType can not be a null or empty")
+    @NotNull(message = "LoanType can not be a null or empty")
     @Schema(
             description = "Type of the loan", example = "HOME", allowableValues = {"PERSONAL", "HOME", "AUTO", "EDUCATION", "BUSINESS"}
     )
