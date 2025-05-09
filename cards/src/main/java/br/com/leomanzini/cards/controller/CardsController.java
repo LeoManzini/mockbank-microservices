@@ -95,4 +95,30 @@ public class CardsController {
         cardsService.updateCard(mobileNumber, cardsDto);
         return ResponseBuilder.ok(CardsConstants.MESSAGE_200);
     }
+
+    @Operation(
+            summary = "Delete card",
+            description = "Deletes a mocked card"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "204",
+                    description = "NO CONTENT"
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "NOT FOUND",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
+            )
+    })
+    @DeleteMapping
+    public ResponseEntity<Void> deleteCardDetails(@Parameter(
+            name = "mobileNumber",
+            description = "Mobile number to delete a mock card",
+            required = true,
+            example = "1234567890"
+    ) @RequestParam @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits") String mobileNumber) {
+        cardsService.deleteCard(mobileNumber);
+        return ResponseBuilder.noContent();
+    }
 }
