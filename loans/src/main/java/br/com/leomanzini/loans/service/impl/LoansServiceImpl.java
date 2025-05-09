@@ -22,12 +22,12 @@ public class LoansServiceImpl implements LoansServiceInterface {
     private final LoansRepository loansRepository;
 
     @Override
-    public void createLoan(String mobileNumber) {
+    public String createLoan(String mobileNumber) {
         Optional<Loans> optionalLoans = loansRepository.findByMobileNumber(mobileNumber);
         if (optionalLoans.isPresent()) {
             throw new LoanAlreadyExistsException("Loan already registered with given mobileNumber " + mobileNumber);
         }
-        loansRepository.save(createNewLoan(mobileNumber));
+        return loansRepository.save(createNewLoan(mobileNumber)).getLoanNumber();
     }
 
     @Override
