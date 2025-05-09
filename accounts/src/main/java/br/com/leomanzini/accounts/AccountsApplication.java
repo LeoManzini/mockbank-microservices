@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @OpenAPIDefinition(
         info = @Info(
                 title = "Accounts",
-                description = "ManziniBank Accounts microsservice",
+                description = "ManziniBank Accounts microservice",
                 version = "v1",
                 contact = @Contact(
                         name = "Leonardo H. Manzini",

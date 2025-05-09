@@ -35,7 +35,7 @@ public class AccountsController {
 
     @Operation(
             summary = "Create account",
-            description = "Creates an account and customer for account"
+            description = "Creates a mock account and mocked customer for account"
     )
     @ApiResponse(
             responseCode = "201",
@@ -49,12 +49,12 @@ public class AccountsController {
 
     @Operation(
             summary = "Fetch account details",
-            description = "Fetch a specific account and customer details"
+            description = "Fetch a specific mocked account and customer details"
     )
     @GetMapping
     public ResponseEntity<AccountsDto> fetchAccountDetails(@Parameter(
             name = "mobileNumber",
-            description = "Mobile number of the customer",
+            description = "Mocked mobile number of the mock customer",
             required = true,
             example = "1234567890"
     ) @RequestParam @Pattern(regexp = "(^$|[0-9]{10,15})", message = "Mobile number should be valid") String mobileNumber) {
@@ -63,7 +63,7 @@ public class AccountsController {
 
     @Operation(
             summary = "Update account details",
-            description = "Update account and customer details"
+            description = "Update mocked account and customer details"
     )
     @ApiResponses({
             @ApiResponse(
@@ -94,7 +94,7 @@ public class AccountsController {
 
     @Operation(
             summary = "Delete account",
-            description = "Deletes an account and its customer"
+            description = "Deletes a mocked account and its customer"
     )
     @ApiResponses({
             @ApiResponse(

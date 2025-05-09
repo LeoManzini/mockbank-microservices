@@ -1,4 +1,4 @@
-package br.com.leomanzini.accounts.domain;
+package br.com.leomanzini.accounts.audit;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
