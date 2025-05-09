@@ -12,7 +12,6 @@ import br.com.leomanzini.loans.utils.LoansConstants;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -23,8 +22,7 @@ public class LoansServiceImpl implements LoansServiceInterface {
 
     @Override
     public String createLoan(String mobileNumber) {
-        Optional<Loans> optionalLoans = loansRepository.findByMobileNumber(mobileNumber);
-        if (optionalLoans.isPresent()) {
+        if (loansRepository.findByMobileNumber(mobileNumber).isPresent()) {
             throw new LoanAlreadyExistsException("Loan already registered with given mobileNumber " + mobileNumber);
         }
         return loansRepository.save(createNewLoan(mobileNumber)).getLoanNumber();
@@ -32,20 +30,27 @@ public class LoansServiceImpl implements LoansServiceInterface {
 
     @Override
     public LoansDto fetchLoan(String mobileNumber) {
-        Loans loans = loansRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber));
+        Loans loans = loansRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber));
         return LoansMapper.mapToLoansDto(loans, new LoansDto());
     }
 
     @Override
-    public void updateLoan(LoansDto loansDto) {
-        Loans loans = loansRepository.findByLoanNumber(loansDto.getLoanNumber()).orElseThrow(() -> new ResourceNotFoundException("Loan", "LoanNumber", loansDto.getLoanNumber()));
+    public void updateLoan(String loanNumber, LoansDto loansDto) {
+        if (!loanNumber.equals(loansDto.getLoanNumber())) {
+            throw new IllegalArgumentException("Loan number in the request body does not match the path variable");
+        }
+
+        Loans loans = loansRepository.findByLoanNumber(loansDto.getLoanNumber())
+                .orElseThrow(() -> new ResourceNotFoundException("Loan", "LoanNumber", loansDto.getLoanNumber()));
         LoansMapper.mapToLoans(loansDto, loans);
         loansRepository.save(loans);
     }
 
     @Override
     public void deleteLoan(String mobileNumber) {
-        Loans loans = loansRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber));
+        Loans loans = loansRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber));
         loansRepository.deleteById(loans.getLoanId());
     }
 
