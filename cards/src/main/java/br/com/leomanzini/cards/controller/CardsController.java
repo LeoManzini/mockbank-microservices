@@ -60,9 +60,8 @@ public class CardsController {
             name = "mobileNumber",
             description = "Mobile number to search for mock card",
             required = true,
-            example = "1234567890")@RequestParam @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits") String mobileNumber) {
-        CardsDto cardsDto = cardsService.fetchCard(mobileNumber);
-        return ResponseEntity.ok(cardsDto);
+            example = "1234567890") @RequestParam @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits") String mobileNumber) {
+        return ResponseEntity.ok(cardsService.fetchCard(mobileNumber));
     }
 
     @Operation(
