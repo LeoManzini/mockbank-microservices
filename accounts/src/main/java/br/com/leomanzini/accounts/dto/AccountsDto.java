@@ -29,7 +29,7 @@ public class AccountsDto {
             example = "SAVINGS",
             allowableValues = {"SAVINGS", "CURRENT", "SALARY"}
     )
-    @NotBlank(message = "Account type is mandatory")
+    @NotNull(message = "Account type is mandatory")
     private AccountType accountType;
 
     @Schema(
