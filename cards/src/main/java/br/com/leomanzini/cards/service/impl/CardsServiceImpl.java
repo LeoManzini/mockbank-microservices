@@ -41,6 +41,10 @@ public class CardsServiceImpl implements CardsServiceInterface {
     @Override
     @Transactional
     public void updateCard(String mobileNumber, CardsDto cardsDto) {
+        if (!mobileNumber.equals(cardsDto.getMobileNumber())) {
+            throw new IllegalArgumentException("Mobile number in the request body does not match the path variable");
+        }
+
         Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
         CardsMapper.mapToCards(cardsDto, cards);
         cardsRepository.save(cards);

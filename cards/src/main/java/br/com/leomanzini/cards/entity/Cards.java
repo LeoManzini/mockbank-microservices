@@ -15,7 +15,9 @@ public class Cards extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cardId;
+    @Column(unique = true, nullable = false)
     private String mobileNumber;
+    @Column(unique = true, updatable = false)
     private String cardNumber;
     @Enumerated(EnumType.STRING)
     private CardType cardType;
