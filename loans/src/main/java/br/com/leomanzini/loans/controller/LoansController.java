@@ -1,5 +1,6 @@
 package br.com.leomanzini.loans.controller;
 
+import br.com.leomanzini.loans.dto.LoansDto;
 import br.com.leomanzini.loans.dto.ResponseDto;
 import br.com.leomanzini.loans.service.LoansServiceInterface;
 import br.com.leomanzini.loans.utils.LoansConstants;
@@ -13,10 +14,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(
         name = "ManziniBank Loans",
@@ -46,5 +44,18 @@ public class LoansController {
             example = "1234567890") @Valid @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
         String loanNumber = loansService.createLoan(mobileNumber);
         return ResponseBuilder.created(LoansConstants.MESSAGE_201, loanNumber);
+    }
+
+    @Operation(
+            summary = "Fetch loan details",
+            description = "Fetch a specific mocked loan detail"
+    )
+    @GetMapping
+    public ResponseEntity<LoansDto> fetchLoanDetails(@Parameter(
+            name = "mobileNumber",
+            description = "Mobile number to search for mock loan",
+            required = true,
+            example = "1234567890") @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
+        return ResponseEntity.ok(loansService.fetchLoan(mobileNumber));
     }
 }
