@@ -1,5 +1,6 @@
 package br.com.leomanzini.cards.dto;
 
+import br.com.leomanzini.cards.entity.enums.CardType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -29,9 +30,9 @@ public class CardsDto {
 
     @NotEmpty(message = "CardType can not be a null or empty")
     @Schema(
-            description = "Type of the card", example = "Credit Card"
+            description = "Type of the card", example = "CREDIT"
     )
-    private String cardType;
+    private CardType cardType;
 
     @Positive(message = "Total card limit should be greater than zero")
     @Schema(
