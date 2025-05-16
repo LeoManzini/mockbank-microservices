@@ -1,6 +1,6 @@
 services:
   accounts:
-    image: "manzini/accounts:0.0.1"
+    image: "manzini/accounts:0.0.1-SNAPSHOT"
     container_name: "accounts-ms"
     ports:
       - "8080:8080"
