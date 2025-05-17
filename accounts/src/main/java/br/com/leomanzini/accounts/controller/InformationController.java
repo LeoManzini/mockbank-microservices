@@ -1,5 +1,6 @@
 package br.com.leomanzini.accounts.controller;
 
+import br.com.leomanzini.accounts.dto.AccountContactInfoDto;
 import br.com.leomanzini.accounts.dto.ErrorResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,6 +29,7 @@ public class InformationController {
     @Value("${build.version}")
     private String buildVersion;
     private final Environment environment;
+    private final AccountContactInfoDto accountContactInfoDto;
 
     @Operation(
             summary = "Get build info",
@@ -69,5 +71,26 @@ public class InformationController {
     @ResponseStatus(HttpStatus.OK)
     public String getJavaVersion() {
         return environment.getProperty("JAVA_HOME");
+    }
+
+    @Operation(
+            summary = "Get contact info",
+            description = "Contact info details that can be reached out for support"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "INTERNAL SERVER ERROR",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
+            )
+    })
+    @GetMapping("/contact-info")
+    @ResponseStatus(HttpStatus.OK)
+    public AccountContactInfoDto getContactInfo() {
+        return accountContactInfoDto;
     }
 }
