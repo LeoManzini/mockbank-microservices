@@ -1,6 +1,6 @@
 package br.com.leomanzini.accounts.controller;
 
-import br.com.leomanzini.accounts.dto.AccountContactInfoDto;
+import br.com.leomanzini.accounts.dto.AccountsContactInfoDto;
 import br.com.leomanzini.accounts.dto.ErrorResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,7 +29,7 @@ public class InformationController {
     @Value("${build.version}")
     private String buildVersion;
     private final Environment environment;
-    private final AccountContactInfoDto accountContactInfoDto;
+    private final AccountsContactInfoDto accountsContactInfoDto;
 
     @Operation(
             summary = "Get build info",
@@ -90,7 +90,7 @@ public class InformationController {
     })
     @GetMapping("/contact-info")
     @ResponseStatus(HttpStatus.OK)
-    public AccountContactInfoDto getContactInfo() {
-        return accountContactInfoDto;
+    public AccountsContactInfoDto getContactInfo() {
+        return accountsContactInfoDto;
     }
 }

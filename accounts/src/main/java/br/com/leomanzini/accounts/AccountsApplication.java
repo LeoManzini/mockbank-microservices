@@ -1,6 +1,6 @@
 package br.com.leomanzini.accounts;
 
-import br.com.leomanzini.accounts.dto.AccountContactInfoDto;
+import br.com.leomanzini.accounts.dto.AccountsContactInfoDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAwareImpl")
-@EnableConfigurationProperties(value = {AccountContactInfoDto.class})
+@EnableConfigurationProperties(value = {AccountsContactInfoDto.class})
 @OpenAPIDefinition(
         info = @Info(
                 title = "Accounts",
