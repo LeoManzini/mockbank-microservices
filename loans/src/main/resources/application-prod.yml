@@ -1,0 +1,10 @@
+build:
+  version: "3.0.0"
+loans:
+  message: "Hello from loans prod service"
+  contactDetails:
+    name: "John Doe - Loans Prod Service"
+    email: "john-doe@mail.com"
+  onCallSupport:
+    - (555) 555-5555
+    - (555) 555-5556
