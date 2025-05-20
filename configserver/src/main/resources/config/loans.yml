@@ -1,0 +1,10 @@
+build:
+  version: "0.0.1-SNAPSHOT"
+loans:
+  message: "Hello from loans service"
+  contactDetails:
+    name: "John Doe - Loans Service"
+    email: "john-doe@mail.com"
+  onCallSupport:
+    - (555) 555-5555
+    - (555) 555-5556

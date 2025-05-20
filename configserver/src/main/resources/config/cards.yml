@@ -1,0 +1,10 @@
+build:
+  version: "0.0.1-SNAPSHOT"
+cards:
+  message: "Hello from cards service"
+  contactDetails:
+    name: "John Doe - Cards Service"
+    email: "john-doe@mail.com"
+  onCallSupport:
+    - (555) 555-5555
+    - (555) 555-5556
