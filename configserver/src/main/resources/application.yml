@@ -9,11 +9,68 @@ spring:
     config:
       server:
         git:
-          uri: "{cipher}b3297ae89ae717cec2f8ea95413ad66ddda8e69ecaafa73889ee041be9d9f406d5770cab021daaf7352dc7eef96681bd10b47ca6edb15acf3bd16b6536375494a24f7ef80796e68ee6dfdb887bf229a3"
+          uri: "git@github.com:LeoManzini/mockbank-config.git"
           default-label: main
           timeout: 5
           clone-on-start: true
           force-pull: true
+          ignoreLocalSshSettings: true
+          passphrase: "{cipher}8d3e5332c99e89efe2c6e86cd5ad35481cfd837b645dd4f773fb798bac1cc895"
+          privateKey: |
+              -----BEGIN RSA PRIVATE KEY-----
+              Proc-Type: 4,ENCRYPTED
+              DEK-Info: AES-128-CBC,9E132BCBF90506088090F4F4675CB478
+  
+              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
+              -----END RSA PRIVATE KEY-----
         # native:
         # search-locations: classpath:/config
         # search-locations: "file:///D://config"
