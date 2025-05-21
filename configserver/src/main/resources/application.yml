@@ -4,10 +4,16 @@ spring:
   application:
     name: configserver
   profiles:
-    active: native
+    active: git # native only for classpath and file locations
   cloud:
     config:
       server:
-        native:
-          # search-locations: classpath:/config
-          search-locations: "file:///D://config"
+        git:
+          uri: "https://github.com/LeoManzini/mockbank-config.git"
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+        # native:
+        # search-locations: classpath:/config
+        # search-locations: "file:///D://config"
