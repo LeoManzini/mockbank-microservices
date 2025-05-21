@@ -9,7 +9,7 @@ spring:
     config:
       server:
         git:
-          uri: "https://github.com/LeoManzini/mockbank-config.git"
+          uri: "{cipher}b3297ae89ae717cec2f8ea95413ad66ddda8e69ecaafa73889ee041be9d9f406d5770cab021daaf7352dc7eef96681bd10b47ca6edb15acf3bd16b6536375494a24f7ef80796e68ee6dfdb887bf229a3"
           default-label: main
           timeout: 5
           clone-on-start: true
@@ -17,3 +17,5 @@ spring:
         # native:
         # search-locations: classpath:/config
         # search-locations: "file:///D://config"
+encrypt:
+  key: "D123F4E5A6B7C8D9E0F1G2H3I4J5K6L7M8N9O0P1Q2R3S4T5U6V7W8"
