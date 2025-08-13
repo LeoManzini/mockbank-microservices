@@ -23,3 +23,16 @@ spring:
           auto: update
   config:
     import: "optional:configserver:http://localhost:8071/"
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+  cloud:
+    bus:
+      enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
