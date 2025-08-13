@@ -1,11 +1,23 @@
 server:
   port: 8071
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 spring:
   application:
     name: configserver
   profiles:
     active: git # native only for classpath and file locations
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
   cloud:
+    bus:
+      enabled: true
     config:
       server:
         git:
